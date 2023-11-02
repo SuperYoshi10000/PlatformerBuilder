@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Implementation-Title: jMonkeyEngine
+Implementation-Version: 3.6.1-stable
+Automatic-Module-Name: jme3.testdata
+Created-By: 17 (Eclipse Adoptium)
+
