@@ -6,7 +6,7 @@ import local.ytk.g.platformer1.level.entity.GameEntityType;
 
 public class LocalPlayer extends Player {
     public static final GameEntityType<LocalPlayer> TYPE = new GameEntityType<>(level -> new LocalPlayer(level));
-    public static final ModelLoader MODEL_LOADER = new ModelLoader("Entities/Player/material.j3m", "Entities/Player/model.");
+    public static final ModelLoader MODEL_LOADER = new ModelLoader("Entities/Player/player.j3m", "Entities/Player/player.glb");
     public static LocalPlayer PLAYER;
     public LocalPlayer(LevelInstance level) {
         super("Player", level);

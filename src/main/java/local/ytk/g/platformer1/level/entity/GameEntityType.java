@@ -21,7 +21,7 @@ public class GameEntityType<E extends GameEntity> implements PlaceableObject<E> 
     }
     public E create(LevelInstance level, Position3d pos, AssetManager assetManager, Node rootNode) {
         E entity = getter.apply(level);
-        entity.model = model.load(assetManager, null);
+        entity.model = model.loadTo(assetManager, null);
         return entity;
     }
     public static LevelPlacer<GameEntity, GameEntityType<GameEntity>> placer(LevelInstance level, Node rootNode) {

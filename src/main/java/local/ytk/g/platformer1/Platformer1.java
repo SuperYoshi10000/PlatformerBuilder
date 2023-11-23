@@ -2,10 +2,17 @@ package local.ytk.g.platformer1;
 
 import static org.lwjgl.glfw.GLFW.*;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.lwjgl.glfw.GLFW;
 
 import jdk.jshell.JShell;
 
+import com.jme3.anim.AnimComposer;
+import com.jme3.anim.Armature;
+import com.jme3.anim.Joint;
 import com.jme3.app.FlyCamAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.StatsAppState;
@@ -23,6 +30,7 @@ import com.jme3.scene.shape.Box;
 import com.jme3.util.TangentBinormalGenerator;
 
 import local.ytk.g.platformer1.client.render.GameMaterials;
+import local.ytk.g.platformer1.client.render.model.ModelData;
 import local.ytk.g.platformer1.client.window.GameWindow;
 import local.ytk.g.platformer1.level.entity.player.LocalPlayer;
 
@@ -115,9 +123,11 @@ public class Platformer1 extends SimpleApplication {
         GLFW_INIT_FAILED = 0x011001,
         GLFW_WINDOW_CREATION_FAILED = 0x011002;
 
+
     @Override
     public void simpleInitApp() {
         logC("simpleInitApp started", 0);
+
         GameMaterials.initMaterials();
 
         Box b = new Box(1, 1, 1);
@@ -135,7 +145,10 @@ public class Platformer1 extends SimpleApplication {
 
         rootNode.addLight(new AmbientLight());
 
-        LocalPlayer.MODEL_LOADER.load(assetManager, rootNode);
+        ModelData m = LocalPlayer.MODEL_LOADER.loadTo(assetManager, rootNode);
+        logV(m.model.getControl(AnimComposer.class).getAnimClips().stream().findFirst(),3);
+
+        
 
         logC("done", 0);
     }

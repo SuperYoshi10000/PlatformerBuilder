@@ -28,7 +28,7 @@ public class ModelData {
             return this;
         }
 
-        public ModelData load(AssetManager assetManager, Node rootNode) {
+        public ModelData loadTo(AssetManager assetManager, Node rootNode) {
             ModelData modelData = new ModelData();
             modelData.material = assetManager.loadMaterial(materialPath);
             modelData.model = assetManager.loadModel(modelPath);
