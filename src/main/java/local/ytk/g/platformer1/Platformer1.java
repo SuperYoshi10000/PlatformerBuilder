@@ -2,26 +2,17 @@ package local.ytk.g.platformer1;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
+import local.ytk.g.platformer1.level.entity.player.Player;
 import org.lwjgl.glfw.GLFW;
 
-import jdk.jshell.JShell;
-
 import com.jme3.anim.AnimComposer;
-import com.jme3.anim.Armature;
-import com.jme3.anim.Joint;
 import com.jme3.app.FlyCamAppState;
 import com.jme3.app.SimpleApplication;
 import com.jme3.app.StatsAppState;
 import com.jme3.app.state.AppState;
 import com.jme3.asset.AssetManager;
 import com.jme3.light.AmbientLight;
-import com.jme3.light.Light;
 import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
 import com.jme3.renderer.RenderManager;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
@@ -31,8 +22,6 @@ import com.jme3.util.TangentBinormalGenerator;
 
 import local.ytk.g.platformer1.client.render.GameMaterials;
 import local.ytk.g.platformer1.client.render.model.ModelData;
-import local.ytk.g.platformer1.client.window.GameWindow;
-import local.ytk.g.platformer1.level.entity.player.LocalPlayer;
 
 @SuppressWarnings("unused")
 public class Platformer1 extends SimpleApplication {
@@ -79,6 +68,7 @@ public class Platformer1 extends SimpleApplication {
         logC("executed", 0);
     }
 
+    @Deprecated
     public static void initGlfwForApp() {
         boolean success = glfwInit();
         if (!success) {
@@ -115,9 +105,10 @@ public class Platformer1 extends SimpleApplication {
      * <ul>
      * <li>{@code 0x000000 GAME_CLOSED}: The game was closed normally.
      * <li>{@code 0x011001 GLFW_INIT_FAILED}: GLFW failed to initialize - {@link GLFW#glfwInit} returned {@code false}.
-     * <li>{@code 0x011002 GLFW_WINDOW_CREATION_FAILED}: GLFW could not open a window - {@link GLFW#glfwCreateWindow} returned {@code NULL} and no window could open.
+     * <li>{@code 0x011002 GLFW_WINDOW_CREATION_FAILED}: GLFW could not open aCodec window - {@link GLFW#glfwCreateWindow} returned {@code NULL} and no window could open.
      * </ul>
     */
+    @Deprecated
     public static final int
         GAME_CLOSED = 0x000000,
         GLFW_INIT_FAILED = 0x011001,
@@ -127,8 +118,12 @@ public class Platformer1 extends SimpleApplication {
     @Override
     public void simpleInitApp() {
         logC("simpleInitApp started", 0);
-
+        
+        Assets.initAssetManager();
+        Assets.useAssetManager(assetManager);
         GameMaterials.initMaterials();
+
+        test();
 
         Box b = new Box(1, 1, 1);
         Geometry geom = new Geometry("Box", b);
@@ -145,12 +140,28 @@ public class Platformer1 extends SimpleApplication {
 
         rootNode.addLight(new AmbientLight());
 
-        ModelData m = LocalPlayer.MODEL_LOADER.loadTo(assetManager, rootNode);
-        logV(m.model.getControl(AnimComposer.class).getAnimClips().stream().findFirst(),3);
+        ModelData m;
+        try {
+            m = Player.MODEL_LOADER.loadTo(assetManager, rootNode);
+            logV(m.model.getControl(AnimComposer.class).getAnimClips().stream().findFirst(), 3);
+        } catch (Exception e) {
+            logM("Could not load player model", 1);
+        }
 
         
 
         logC("done", 0);
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    private void test() {
+        try{
+            System.out.println("T0");
+            System.out.println(assetManager.loadMaterial("Entities/Player/player.j3m"));
+            System.out.println("T1");
+            System.out.println(assetManager.loadModel("Entities/Player/player.glb"));
+            System.out.println("T2");
+        }catch(Exception e){e.printStackTrace();}
     }
 
     @Override
@@ -176,13 +187,13 @@ public class Platformer1 extends SimpleApplication {
         for (int i = 0; i < values.length; i++) {
             String v = keys[i] + ": " + getStringFor(values[i]);
             logM(v, 2);
-            builder.append(v + (i < values.length - 1 ? ", " : ""));
+            builder.append(v).append(i < values.length - 1 ? ", " : "");
         }
-        return "{ " + builder.toString() + " }";
+        return "{ " + builder + " }";
     }
     protected String getStringFor(Object value) {
         if (value instanceof Boolean b) return b.toString();
-        if (value instanceof Byte b) return b + "b";
+        if (value instanceof Byte b) return b + "bCodec";
         if (value instanceof Short s) return s + "s";
         if (value instanceof Integer i) return i + "i";
         if (value instanceof Long l) return l + "l";

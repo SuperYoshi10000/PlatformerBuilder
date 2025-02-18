@@ -1,6 +1,6 @@
 package local.ytk.g.platformer1.level.old.object;
 
-import local.ytk.g.platformer1.level.phys.Position3d;
+import local.ytk.g.platformer1.math.Position3d;
 
 public class ObjectPosition extends Position3d {
     public ObjectPosition(double multiplier) {

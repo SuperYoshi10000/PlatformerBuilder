@@ -1,6 +1,6 @@
 package local.ytk.g.platformer1.level.tile;
 
-import local.ytk.g.platformer1.level.phys.Position3d;
+import local.ytk.g.platformer1.math.Position3d;
 
 public class FloatingTileState extends Position3d implements TileState<FloatingTileState> {
     public final FloatingTile tile;

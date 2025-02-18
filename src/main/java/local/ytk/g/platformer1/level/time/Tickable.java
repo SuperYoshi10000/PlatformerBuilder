@@ -2,8 +2,9 @@ package local.ytk.g.platformer1.level.time;
 
 @FunctionalInterface
 public interface Tickable {
-    public void tick();
-    public default void tickOn(Ticker ticker) {
+    void tick();
+    default Tickable tickOn(Ticker ticker) {
         ticker.add(this);
+        return this;
     }
 }

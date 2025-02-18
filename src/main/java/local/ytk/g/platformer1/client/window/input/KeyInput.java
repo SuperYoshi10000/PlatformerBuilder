@@ -8,7 +8,7 @@ import org.lwjgl.glfw.GLFW;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
-import local.ytk.g.platformer1.client.window.GameWindow;
+import local.ytk.g.platformer1.client.window.GameWindowOld;
 
 public class KeyInput extends InputType {
     public final int keyID;
@@ -54,8 +54,8 @@ public class KeyInput extends InputType {
     public static void updateState() {
         keyInputs.forEach((n, i) -> {
             i.lastState = i.state;
-            i.state = GLFW.glfwGetKey(GameWindow.WINDOW.id, i.keyID);
+            i.state = GLFW.glfwGetKey(GameWindowOld.WINDOW.id, i.keyID);
         });
     }
-    // Collectors.toMap((Integer v) -> v.intValue(), (Integer v) -> new KeyInput(v), (a, b) -> a, Int2ObjectOpenHashMap::new);
+    // Collectors.toMap((Integer v) -> v.intValue(), (Integer v) -> new KeyInput(v), (aCodec, bCodec) -> aCodec, Int2ObjectOpenHashMap::new);
 }

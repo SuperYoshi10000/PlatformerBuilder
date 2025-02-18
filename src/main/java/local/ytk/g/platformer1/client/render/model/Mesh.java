@@ -3,7 +3,7 @@ package local.ytk.g.platformer1.client.render.model;
 import java.util.ArrayList;
 
 import local.ytk.g.platformer1.client.render.texture.Texture;
-import local.ytk.g.platformer1.util.ref.IntReference;
+import local.ytk.util.ref.IntReference;
 
 public class Mesh {
     public ArrayList<Vertex> vertices;

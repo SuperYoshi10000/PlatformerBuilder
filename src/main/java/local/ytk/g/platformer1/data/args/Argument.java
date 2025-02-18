@@ -1,7 +1,7 @@
 package local.ytk.g.platformer1.data.args;
 
 import java.util.List;
-import local.ytk.g.platformer1.util.StringFunction;
+import local.ytk.util.function.StringFunction;
 
 public class Argument<T> {
     protected static final ArgTypeConverter<String> STRING = tc(String.class, a -> a);

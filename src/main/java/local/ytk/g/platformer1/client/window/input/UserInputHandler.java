@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.function.IntConsumer;
 
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import local.ytk.g.platformer1.client.window.GameWindow;
+import local.ytk.g.platformer1.client.window.GameWindowOld;
 
 import static org.lwjgl.glfw.GLFW.*;
-import static local.ytk.g.platformer1.client.window.GameWindow.WINDOW;
+import static local.ytk.g.platformer1.client.window.GameWindowOld.WINDOW;
 
 public abstract class UserInputHandler {
     public static final Int2ObjectOpenHashMap<KeyInput> keyInputs = KeyInput.keyInputs;
@@ -34,7 +34,7 @@ public abstract class UserInputHandler {
     public abstract void hold();
 
     public static void createCallbacks() {
-        // glfwSetKeyCallback(WINDOW.id, (w, k, c, a, m) -> inputCallback(keyInputs.get(k), a));
+        // glfwSetKeyCallback(WINDOW.id, (w, k, c, aCodec, m) -> inputCallback(keyInputs.get(k), aCodec));
         glfwSetScrollCallback(WINDOW.id, (w, x, y) -> inputCallback(MouseInput.MOUSE_WHEEL_SCROLL, 1));
         glfwSetMouseButtonCallback(WINDOW.id, (w, b, a, m) -> inputCallback(mouseInputs.get(b), a));
     }
@@ -146,6 +146,6 @@ public abstract class UserInputHandler {
         ACTION_2 = create(null, false),
         ACTION_3 = create(null, false),
         ACTION_4 = create(null, false),
-        FULLSCREEN = create(GameWindow.WINDOW::toggleFullscreen, false);
+        FULLSCREEN = create(GameWindowOld.WINDOW::toggleFullscreen, false);
 
 }

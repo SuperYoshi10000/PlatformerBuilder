@@ -1,8 +1,8 @@
 package local.ytk.g.platformer1.level.layout;
 
 import java.util.ArrayList;
-import local.ytk.g.platformer1.level.phys.GridPosition2d;
-import local.ytk.g.platformer1.level.phys.GridPosition3d;
+import local.ytk.g.platformer1.math.GridPosition2d;
+import local.ytk.g.platformer1.math.GridPosition3d;
 import local.ytk.g.platformer1.level.tile.GridTile;
 
 public class Grid3d extends Grid2d {

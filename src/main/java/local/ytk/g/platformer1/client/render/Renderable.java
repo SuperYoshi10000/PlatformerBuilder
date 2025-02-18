@@ -1,6 +1,6 @@
 package local.ytk.g.platformer1.client.render;
 
-import local.ytk.g.platformer1.level.phys.Position3d;
+import local.ytk.g.platformer1.math.Position3d;
 
 public interface Renderable {
 

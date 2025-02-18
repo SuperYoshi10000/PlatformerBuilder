@@ -1,7 +1,10 @@
 package local.ytk.g.platformer1.data.store;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import java.nio.ByteBuffer;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 public class DataStorage implements Data {
     public final ByteBuffer buffer;
@@ -27,8 +30,11 @@ public class DataStorage implements Data {
     
     @Override
     public ByteBuffer read(int index, int length) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'read'");
+        return ByteBuffer.wrap(buffer.slice(index, length).array());
+    }
+    @Override
+    public ByteBuffer slice(int index, int length) {
+        return buffer.slice(index, length);
     }
     @Override
     public ByteBuffer readRange(int start, int end) {
@@ -37,75 +43,90 @@ public class DataStorage implements Data {
     }
     
     @Override
-    public boolean readBoolean(int index, byte bitOffset) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readBoolean'");
+    public boolean readBoolean(int index, byte offset) {
+        if (offset < 0 || offset > 7) throw new IllegalArgumentException("Offset must be between 0 and 7");
+        return (buffer.get(index) >> 7 - offset) % 2 == 0;
     }
     @Override
     public byte readByte(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readByte'");
+        return buffer.get(index);
     }
     @Override
     public short readShort(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readShort'");
+        return buffer.getShort(index);
     }
     @Override
     public int readInt(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readInt'");
+        return buffer.getInt(index);
     }
     @Override
     public long readLong(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readLong'");
+        return buffer.getLong(index);
     }
     @Override
     public float readFloat(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readFloat'");
+        return buffer.getFloat(index);
     }
     @Override
     public double readDouble(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readDouble'");
+        return buffer.getDouble(index);
+    }
+    @Override
+    public char readChar(int index) {
+        return buffer.getChar(index);
     }
 
     @Override
     public boolean[] readBooleans(int index, int count, byte bitOffset) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readBooleans'");
+        return IntStream.of(readInts(index, Math.ceilDiv(count, 32) + 1)).mapToObj(n -> {
+            boolean[] booleans = new boolean[32];
+            for (int i = 0; i < 32; ++i) {
+                booleans[i] = (n & (1 << i)) != 0;
+            }
+            return booleans;
+        }).reduce(new boolean[0], ArrayUtils::addAll);
     }
     @Override
     public byte[] readBytes(int index, int count) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readBytes'");
+        byte[] dst = new byte[count];
+        buffer.get(index, dst);
+        return dst;
     }
     @Override
     public short[] readShorts(int index, int count) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readShorts'");
+        short[] dst = new short[count];
+        buffer.asShortBuffer().get(index, dst);
+        return dst;
     }
     @Override
     public int[] readInts(int index, int count) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readInts'");
+        int[] dst = new int[count];
+        buffer.asIntBuffer().get(index, dst);
+        return dst;
     }
     @Override
     public long[] readLongs(int index, int count) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readLongs'");
+        long[] dst = new long[count];
+        buffer.asLongBuffer().get(index, dst);
+        return dst;
     }
     @Override
     public float[] readFloats(int index, int count) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readFloats'");
+        float[] dst = new float[count];
+        buffer.asFloatBuffer().get(index, dst);
+        return dst;
     }
     @Override
     public double[] readDoubles(int index, int count) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'readDoubles'");
+        double[] dst = new double[count];
+        buffer.asDoubleBuffer().get(index, dst);
+        return dst;
+    }
+    @Override
+    public char[] readChars(int index, int count) {
+        char[] dst = new char[count];
+        buffer.asCharBuffer().get(index, dst);
+        return dst;
     }
 
     @SuppressWarnings("unchecked")

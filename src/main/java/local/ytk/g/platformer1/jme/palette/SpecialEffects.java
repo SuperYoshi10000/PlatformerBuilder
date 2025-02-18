@@ -57,7 +57,7 @@ public class SpecialEffects {
 
     }
     public void fog(AssetManager assetManager, ViewPort viewPort) {
-     /** Add fog to a scene */
+     /** Add fog to aCodec scene */
         FilterPostProcessor fpp=new FilterPostProcessor(assetManager);
         FogFilter fog=new FogFilter();
         fog.setFogColor(new ColorRGBA(0.9f, 0.9f, 0.9f, 1.0f));

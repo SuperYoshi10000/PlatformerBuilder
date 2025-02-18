@@ -1,6 +1,6 @@
 package local.ytk.g.platformer1.client.render.texture;
 
-import local.ytk.g.platformer1.level.phys.GridPosition2d;
+import local.ytk.g.platformer1.math.GridPosition2d;
 
 public abstract class Texture {
     public static final Texture BLANK = new StaticTexture(null);

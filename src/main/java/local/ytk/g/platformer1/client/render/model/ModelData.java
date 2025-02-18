@@ -30,10 +30,10 @@ public class ModelData {
 
         public ModelData loadTo(AssetManager assetManager, Node rootNode) {
             ModelData modelData = new ModelData();
-            modelData.material = assetManager.loadMaterial(materialPath);
+            // modelData.material = assetManager.loadMaterial(materialPath);
             modelData.model = assetManager.loadModel(modelPath);
 
-            modelData.model.setMaterial(modelData.material);
+            // modelData.model.setMaterial(modelData.material);
             rootNode.attachChild(modelData.model);
 
             return modelData;

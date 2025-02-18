@@ -2,15 +2,15 @@ package local.ytk.g.platformer1.level.tile;
 
 import java.util.List;
 import java.util.ArrayList;
-import local.ytk.g.platformer1.data.ResourceName;
+import local.ytk.g.platformer1.data.Identifier;
 
 public class TileTag<T extends Tile<?>> {
-    public static final TileTag<?> EMPTY = new TileTag<>(new ResourceName("%game%:empty"));
-    public static final TileTag<?> SOLID = new TileTag<>(new ResourceName("%game%:solid"));
+    public static final TileTag<?> EMPTY = new TileTag<>(new Identifier("%game%:empty"));
+    public static final TileTag<?> SOLID = new TileTag<>(new Identifier("%game%:solid"));
 
-    public final ResourceName id;
+    public final Identifier id;
     public final ArrayList<T> tiles = new ArrayList<>();
-    public TileTag(ResourceName id) {
+    public TileTag(Identifier id) {
         this.id = id;
     }
 

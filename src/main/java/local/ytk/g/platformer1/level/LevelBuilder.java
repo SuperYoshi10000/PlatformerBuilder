@@ -7,12 +7,13 @@ import com.jme3.scene.Node;
 import local.ytk.g.platformer1.Platformer1;
 import local.ytk.g.platformer1.client.render.model.ModelData;
 import local.ytk.g.platformer1.level.entity.GameEntity;
-import local.ytk.g.platformer1.level.entity.GameEntityType;
+import local.ytk.g.platformer1.level.entity.EntityType;
+import local.ytk.g.platformer1.level.object.ObjectPlacer;
 
 public abstract class LevelBuilder {
     protected String name;
     @Nullable
-    public LevelInstance level;
+    public Level level;
 
     ModelData.ModelLoader model;
 
@@ -24,12 +25,12 @@ public abstract class LevelBuilder {
     }
 
     public LevelInstance load() {
-        LevelInstance level = new LevelInstance();
+        LevelInstance instance = new LevelInstance(level);
         Node rootNode = Platformer1.app().getRootNode();
-        setup(GameEntityType.placer(level, rootNode));
-        return level;
+        setup(EntityType.placer(instance, rootNode));
+        return instance;
     }
     public abstract void setup(
-        LevelPlacer<GameEntity, GameEntityType<GameEntity>> entities
+        ObjectPlacer<GameEntity, EntityType<GameEntity>> entities
     );
 }

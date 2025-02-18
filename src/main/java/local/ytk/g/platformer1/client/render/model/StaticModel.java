@@ -2,7 +2,7 @@ package local.ytk.g.platformer1.client.render.model;
 
 import local.ytk.g.platformer1.client.render.Screen;
 import local.ytk.g.platformer1.client.render.texture.Texture;
-import local.ytk.g.platformer1.level.phys.Position3d;
+import local.ytk.g.platformer1.math.Position3d;
 
 public class StaticModel implements Model, ModelInstance {
     public StaticModel() {
@@ -11,7 +11,7 @@ public class StaticModel implements Model, ModelInstance {
 
     @Override
     public void render(Screen screen, Position3d position) {
-        screen.renderOnWindow(this, position);
+//        screen.renderOnWindow(this, position);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class StaticModel implements Model, ModelInstance {
         }
         @Override
         public void render(Screen screen, Position3d position) {
-            screen.renderOnWindow(null, position);
+//            screen.renderOnWindow(null, position);
         }
     }
 }

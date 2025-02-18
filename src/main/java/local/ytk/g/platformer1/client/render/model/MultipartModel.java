@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import local.ytk.g.platformer1.client.render.Screen;
-import local.ytk.g.platformer1.level.phys.Position3d;
-import local.ytk.g.platformer1.util.SequentialCollector;
+import local.ytk.g.platformer1.math.Position3d;
+import local.ytk.util.collection.SequentialCollector;
 
 public class MultipartModel implements Model {
     public MultipartModel(Model baseModel, HashMap<ModelPart, Position3d> subModelParts, HashMap<ModelPart, Model> subModels) {

@@ -7,15 +7,15 @@ plugins {
 }
 
 project.ext {
-	version = "0.1-dev1.2"
+	version = "0.1-dev1.3"
 	groupId = "local.ytk.g.platformer1"
 	artifactId = "Platformer1"
 	name = "Platformer Library"
 	description = "A library for making 2.5D platformers"
 	url = "https://www.example.com/library"
-	year = 2023
-	license = "The Apache License, Version 2.0";
-	licenseUrl = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+	year = 2025
+	license = "GNU General Public License v3.0";
+	licenseUrl = "https://www.gnu.org/licenses/gpl-3.0.html"
 	developer = "ytk"
 	developerId = "ytk"
 	developerEmail = "email@example.com"
@@ -55,11 +55,14 @@ application {
 repositories {
 	maven { url "https://jitpack.io" }
     mavenCentral()
-    mavenLocal()
+	mavenLocal()
+	maven { url "https://libraries.minecraft.net" }
 }
 
 dependencies {
-	// LWJGL
+	compileOnly "org.jetbrains:annotations:24.1.0"
+	
+	/* LWJGL */
 	implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
 
 	implementation "org.lwjgl:lwjgl"
@@ -152,45 +155,66 @@ dependencies {
 	implementation "org.lwjglx:lwjgl3-awt:${lwjgl3AwtVersion}"
 	implementation "com.code-disaster.steamworks4j:steamworks4j:${steamworks4jVersion}"
 	implementation "com.code-disaster.steamworks4j:steamworks4j-server:${steamworks4jServerVersion}"
-
-	// Google
-	implementation "com.google.guava:guava:32.1.2-jre"
-
-	// Fastutil
-	implementation "it.unimi.dsi:fastutil:8.5.12"
-
-	// Apache
-	implementation "org.apache.commons:commons-lang3:3.13.0"
-	implementation "org.apache.commons:commons-collections4:4.4"
-
+	
+	
 	// OGRE 3D
+	// NOT USED
 	// implementation files("dependencies/ogre-${ogreVersion}/share/java/Ogre-${ogreVersion}.jar")
 	// runtimeOnly files("dependencies/ogre-${ogreVersion}/lib/OgreJNI.dll")
-
+	
+	/* JMonkey */
 	implementation 'org.jmonkeyengine:jme3-core:' + jmonkeyengineVersion
-    implementation 'org.jmonkeyengine:jme3-desktop:' + jmonkeyengineVersion
-    runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jmonkeyengineVersion
-    runtimeOnly 'org.jmonkeyengine:jme3-plugins:' + jmonkeyengineVersion
-
-    implementation 'org.jmonkeyengine:jme3-effects:' + jmonkeyengineVersion
-    implementation 'org.jmonkeyengine:jme3-terrain:' + jmonkeyengineVersion
-    implementation 'org.jmonkeyengine:jme3-networking:' + jmonkeyengineVersion
-    implementation 'org.jmonkeyengine:jme3-jbullet:' + jmonkeyengineVersion
-    runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jmonkeyengineVersion
+	implementation 'org.jmonkeyengine:jme3-desktop:' + jmonkeyengineVersion
+	runtimeOnly 'org.jmonkeyengine:jme3-jogg:' + jmonkeyengineVersion
+	runtimeOnly 'org.jmonkeyengine:jme3-plugins:' + jmonkeyengineVersion
+	
+	implementation 'org.jmonkeyengine:jme3-effects:' + jmonkeyengineVersion
+	implementation 'org.jmonkeyengine:jme3-terrain:' + jmonkeyengineVersion
+	implementation 'org.jmonkeyengine:jme3-networking:' + jmonkeyengineVersion
+	implementation 'org.jmonkeyengine:jme3-jbullet:' + jmonkeyengineVersion
+	runtimeOnly 'org.jmonkeyengine:jme3-lwjgl3:' + jmonkeyengineVersion
 	implementation "org.jmonkeyengine:jme3-testdata:" + jmonkeyengineVersion
-
-    implementation 'com.simsilica:lemur:1.16.0'
-    implementation 'com.simsilica:lemur-proto:1.13.0'
-    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
-    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+	
+	implementation 'com.simsilica:lemur:1.16.0'
+	implementation 'com.simsilica:lemur-proto:1.13.0'
+	implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+	implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
 	implementation "org.jmonkeyengine:jme3-effects:$jmonkeyengineVersion"
 	implementation "org.jmonkeyengine:jme3-terrain:$jmonkeyengineVersion"
 	implementation "org.jmonkeyengine:jme3-vr:$jmonkeyengineVersion"
 	implementation "com.github.stephengold:Heart:8.7.0"
 	implementation "com.epagagames:particlemonkey:1.1.0"
+	
+	// Utilities
+	implementation "com.google.guava:guava:32.1.2-jre"
+	implementation "it.unimi.dsi:fastutil:8.5.12"
+	implementation "org.apache.commons:commons-lang3:3.13.0"
+	implementation "org.apache.commons:commons-collections4:4.4"
+	implementation "io.netty:netty-all:4.1.99.Final"
+//	implementation "org.json:json:"
+	
+	// JavaUtils
+	implementation project("JavaUtils")
 
+	//
+	implementation "com.mojang:datafixerupper:1.0.20"
+	implementation "com.mojang:brigadier:1.0.18"
+	
+	// Testing only
+	testImplementation "org.junit.jupiter:junit-jupiter:5.10.3"
+	
 	// Assets sub-project
   	runtimeOnly project(":assets")
+}
+
+test {
+	useJUnitPlatform()
+}
+
+jar {
+	manifest {
+		attributes "Main-Class": "local.ytk.g.platformer1.Platformer1"
+	}
 }
 
 project(":assets") {

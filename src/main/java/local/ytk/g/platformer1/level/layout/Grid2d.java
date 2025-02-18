@@ -2,7 +2,7 @@ package local.ytk.g.platformer1.level.layout;
 
 import java.util.ArrayList;
 
-import local.ytk.g.platformer1.level.phys.GridPosition2d;
+import local.ytk.g.platformer1.math.GridPosition2d;
 import local.ytk.g.platformer1.level.tile.GridTile;
 
 public class Grid2d {

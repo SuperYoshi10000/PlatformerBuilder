@@ -1,6 +1,6 @@
 package local.ytk.g.platformer1.level.tile;
 
-import local.ytk.g.platformer1.level.phys.GridPosition3d;
+import local.ytk.g.platformer1.math.GridPosition3d;
 
 public class GridTileState extends GridPosition3d implements TileState<GridTileState> {
     public final GridTile tile;

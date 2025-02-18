@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import local.ytk.g.platformer1.client.render.Screen;
 import local.ytk.g.platformer1.client.render.texture.Animation;
-import local.ytk.g.platformer1.level.phys.Position3d;
+import local.ytk.g.platformer1.math.Position3d;
 
 public class AnimatedModel implements Model {
     protected final StaticModel[] frames;

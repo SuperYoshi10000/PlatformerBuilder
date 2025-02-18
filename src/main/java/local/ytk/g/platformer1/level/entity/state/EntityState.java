@@ -2,7 +2,7 @@ package local.ytk.g.platformer1.level.entity.state;
 
 import java.util.Map;
 
-import local.ytk.g.platformer1.level.phys.Position3d;
+import local.ytk.g.platformer1.math.Position3d;
 
 import static local.ytk.g.platformer1.level.entity.state.EntityModelPart.*;
 
