@@ -11,4 +11,4 @@ rootProject.name = "platformer1"
 include "assets"
 
 include ":JavaUtils"
-project(":JavaUtils").projectDir = new File("M:/backup1/Minecraft/Mods/JavaUtils")
+project(":JavaUtils").projectDir = new File("../JavaUtils")
